@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>Promise 简单实现 - 朝花夕拾</title>
+
+
+    <meta name="description" content="什么是 Promisepromise 是一个对象，对象和函数的区别就是对象可以保存状态，函数不可以（闭包除外）,并未剥夺函数 return 的能力，因此无需层层传递 callback，进行回调获取数据,其代码风格，容易理解，便于维护并且多个异步等待合并便于解决,最终的目的是为了解决 JS 中过多的回调嵌套。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Promise 简单实现">
+<meta property="og:url" content="https://www.2048888.xyz/2020/04/02/JS/ES6-promise/index.html">
+<meta property="og:site_name" content="朝花夕拾">
+<meta property="og:description" content="什么是 Promisepromise 是一个对象，对象和函数的区别就是对象可以保存状态，函数不可以（闭包除外）,并未剥夺函数 return 的能力，因此无需层层传递 callback，进行回调获取数据,其代码风格，容易理解，便于维护并且多个异步等待合并便于解决,最终的目的是为了解决 JS 中过多的回调嵌套。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.4/image/js/promise.jpg">
+<meta property="article:published_time" content="2020-04-02T09:00:07.397Z">
+<meta property="article:modified_time" content="2020-04-21T08:34:53.573Z">
+<meta property="article:author" content="lightzhu">
+<meta property="article:tag" content="ES6 promise">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.4/image/js/promise.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="Promise 简单实现" height="28">
+                
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/"><i
+                        class="fa fa-house-damage"></i> 主页</a>
+                
+                <a class="navbar-item" href="/archives"><i
+                        class="fa fa-folder"></i> 归档</a>
+                
+                <a class="navbar-item" href="/categories"><i
+                        class="fa fa-list"></i> 分类</a>
+                
+                <a class="navbar-item" href="/tags"><i
+                        class="fa fa-tags"></i> 标签</a>
+                
+                <a class="navbar-item" href="/about"><i
+                        class="fa fa-user-friends"></i> About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                
+                <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub"
+                    href="https://github.com/lightzhu/Blog">
+                    
+                    <i class="fab fa-github"></i>
+                    
+                </a>
+                
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.4/image/js/promise.jpg" alt="Promise 简单实现">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-02T09:00:07.397Z">2020-04-02</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/JS/">JS</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 417 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Promise 简单实现
+            
+        </h1>
+        <div class="content">
+            <h4 id="什么是-Promise"><a href="#什么是-Promise" class="headerlink" title="什么是 Promise"></a>什么是 Promise</h4><p>promise 是一个对象，对象和函数的区别就是对象可以保存状态，函数不可以（闭包除外）,并未剥夺函数 return 的能力，因此无需层层传递 callback，进行回调获取数据,其代码风格，容易理解，便于维护并且多个异步等待合并便于解决,最终的目的是为了解决 JS 中过多的回调嵌套。</p>
+<a id="more"></a>
+
+<p><img src="https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.2/image/bg1.jpg" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">const PENDING = <span class="string">'pending'</span></span><br><span class="line">const FULFILLED = <span class="string">'fulfilled'</span></span><br><span class="line">const REJECTED = <span class="string">'rejected'</span></span><br><span class="line">class Promise &#123;</span><br><span class="line">  constructor(executor) &#123;</span><br><span class="line">    this.status = PENDING</span><br><span class="line">    //初始化成功的回调</span><br><span class="line">    this.onResolvedCb = []</span><br><span class="line">    //初始化失败的回调</span><br><span class="line">    this.onRejectedCb = []</span><br><span class="line">    this.value = null</span><br><span class="line">    this.reason = null</span><br><span class="line">    try &#123;</span><br><span class="line">      executor(this.resolve.bind(this), this.reject.bind(this))</span><br><span class="line">    &#125; catch (e) &#123;</span><br><span class="line">      this.reject(e);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  resolve(value) &#123;</span><br><span class="line">    console.log(value + <span class="string">'resolve'</span>)</span><br><span class="line">    //如果当前状态是pending的话调用这个函数可以将状态改成fulfilled</span><br><span class="line">    <span class="keyword">if</span> (this.status == PENDING) &#123;</span><br><span class="line">      this.status = FULFILLED</span><br><span class="line">      // 将获取到的值赋值给当前对象，并且让所有的成功回调函数执行</span><br><span class="line">      this.value = value</span><br><span class="line">      this.onResolvedCb.forEach((item) =&gt; item(value))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  reject(reason) &#123;</span><br><span class="line">    console.log(reason + <span class="string">'reject'</span>)</span><br><span class="line">    // 如果当前状态是pending的话调用这个函数可以将状态改成rejected</span><br><span class="line">    <span class="keyword">if</span> (this.status == PENDING) &#123;</span><br><span class="line">      this.status = REJECTED</span><br><span class="line">      // 将原因值赋值给当前对象，并且让所有的失败的回调函数执行</span><br><span class="line">      this.reason = reason</span><br><span class="line">      this.onRejectedCb.forEach((item) =&gt; item(reason))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">then</span>(onFulfilled, onRejected) &#123;</span><br><span class="line">    <span class="built_in">let</span> self = this</span><br><span class="line">    // 处理如果没有指定相应的回调时的情况</span><br><span class="line">    onFulfilled = typeof onFulfilled == <span class="string">'function'</span> ? onFulfilled : value =&gt; value;</span><br><span class="line">    onRejected = typeof onRejected == <span class="string">'function'</span> ? onRejected : reason =&gt; &#123; throw reason &#125;;</span><br><span class="line">    <span class="keyword">if</span> (self.status === FULFILLED) &#123;</span><br><span class="line">      <span class="built_in">let</span> x = onFulfilled(self.value)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (self.status === REJECTED) &#123;</span><br><span class="line">      <span class="built_in">let</span> y = onRejected(self.reason)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (self.status === PENDING) &#123;</span><br><span class="line">      self.onResolvedCb.push(<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        <span class="built_in">let</span> x = onFulfilled(self.value)</span><br><span class="line">      &#125;)</span><br><span class="line">      self.onRejectedCb.push(<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">        <span class="built_in">let</span> x = onRejected(self.reason)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">module.exports = Promise</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Promise/" rel="tag">Promise</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/zfb.png" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/wechat.png" alt="微信"></div>
+</a>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<a class="button is-warning donate" onclick="document.getElementById(&#39;paypal-donate-form&#39;).submit()">
+    <span class="icon is-small">
+        <i class="fab fa-paypal"></i>
+    </span>
+    <span>Paypal</span>
+</a>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener" id="paypal-donate-form">
+    <input type="hidden" name="cmd" value="_donations" />
+    <input type="hidden" name="business" value="/images/paypal.png" />
+    <input type="hidden" name="currency_code" value="USD" />
+</form>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/04/03/blog-tips/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Blog编写技巧</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/03/31/start/">
+                <span class="level-item">我的第一篇Blog</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="comment-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '04f1feca15ed08c92526',
+        clientSecret: '916556f3c4f86f4864358a75a2aec0a6da11541d',
+        id: '72ca15b638446514b68076841658af24',
+        repo: 'gitalk-comment',
+        owner: 'lightzhu',
+        admin: ["lightzhu"],
+        createIssueManually: false,
+        distractionFreeMode: false
+    })
+    gitalk.render('comment-container')
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="/images/avatar.png" alt="LightZhu">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        LightZhu
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        只怕一生，碌碌无为!
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>China Ningbo</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            10
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            3
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            8
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/lightzhu" target="_blank" rel="noopener">
+                关注我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Github" href="https://github.com/lightzhu">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="Dribbble" href="https://ainode.herokuapp.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/JS/">
+            <span class="level-start">
+                <span class="level-item">JS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Node/">
+            <span class="level-start">
+                <span class="level-item">Node</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Tool/">
+            <span class="level-start">
+                <span class="level-item">Tool</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://www.baidu.com" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Baidu</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.baidu.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://blog.zhangruipeng.me/hexo-theme-icarus/" target="_blank" rel="noopener">
+                    <span class="level-left">
+                        <span class="level-item">Icarus</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">blog.zhangruipeng.me</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen is-sticky">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/07/24/Node/vpn2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://i.loli.net/2020/07/24/Scq1k7hbzwUTQo2.png" alt="免费VPN  L2TP方式,window和android 配置方式">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-24T09:30:57.548Z">2020-07-24</time></div>
+                    <a href="/2020/07/24/Node/vpn2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">免费VPN  L2TP方式,window和android 配置方式</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node/">Node</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/07/24/Node/vpn_L2TP/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://i.loli.net/2020/07/24/6kYcu3ml5XoI1xE.jpg" alt="免费VPN  L2TP方式,mac和ios 配置方式">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-24T08:36:18.260Z">2020-07-24</time></div>
+                    <a href="/2020/07/24/Node/vpn_L2TP/" class="title has-link-black-ter is-size-6 has-text-weight-normal">免费VPN  L2TP方式,mac和ios 配置方式</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node/">Node</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/06/03/Tool/qrcode/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.6.6/image/wap.png" alt="二维码生成器">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-03T09:42:12.702Z">2020-06-03</time></div>
+                    <a href="/2020/06/03/Tool/qrcode/" class="title has-link-black-ter is-size-6 has-text-weight-normal">二维码生成器</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/06/03/Tool/ippenetrate/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.4/image/tool/iptans.jpg" alt="免费服务器 路由端口映射">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-03T09:39:33.964Z">2020-06-03</time></div>
+                    <a href="/2020/06/03/Tool/ippenetrate/" class="title has-link-black-ter is-size-6 has-text-weight-normal">免费服务器 路由端口映射</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Tool/">Tool</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/06/03/Tool/heroku/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.4/image/tool/heroku.jpeg" alt="免费服务器 Heroku">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-03T09:39:30.356Z">2020-06-03</time></div>
+                    <a href="/2020/06/03/Tool/heroku/" class="title has-link-black-ter is-size-6 has-text-weight-normal">免费服务器 Heroku</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Tool/">Tool</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GearHost/">
+                        <span class="tag">GearHost</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Heroku/">
+                        <span class="tag">Heroku</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Promise/">
+                        <span class="tag">Promise</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/QRCode/">
+                        <span class="tag">QRCode</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Tips/">
+                        <span class="tag">Tips</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/VPN-L2TP/">
+                        <span class="tag">VPN L2TP</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/baidu/">
+                        <span class="tag">baidu</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E8%B7%AF%E7%94%B1%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84/">
+                        <span class="tag">路由端口映射</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right is-sticky">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2020/07/24/Node/vpn2/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://i.loli.net/2020/07/24/Scq1k7hbzwUTQo2.png" alt="免费VPN  L2TP方式,window和android 配置方式">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-24T09:30:57.548Z">2020-07-24</time></div>
+                    <a href="/2020/07/24/Node/vpn2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">免费VPN  L2TP方式,window和android 配置方式</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node/">Node</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/07/24/Node/vpn_L2TP/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://i.loli.net/2020/07/24/6kYcu3ml5XoI1xE.jpg" alt="免费VPN  L2TP方式,mac和ios 配置方式">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-24T08:36:18.260Z">2020-07-24</time></div>
+                    <a href="/2020/07/24/Node/vpn_L2TP/" class="title has-link-black-ter is-size-6 has-text-weight-normal">免费VPN  L2TP方式,mac和ios 配置方式</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Node/">Node</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/06/03/Tool/qrcode/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.6.6/image/wap.png" alt="二维码生成器">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-03T09:42:12.702Z">2020-06-03</time></div>
+                    <a href="/2020/06/03/Tool/qrcode/" class="title has-link-black-ter is-size-6 has-text-weight-normal">二维码生成器</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/06/03/Tool/ippenetrate/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.4/image/tool/iptans.jpg" alt="免费服务器 路由端口映射">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-03T09:39:33.964Z">2020-06-03</time></div>
+                    <a href="/2020/06/03/Tool/ippenetrate/" class="title has-link-black-ter is-size-6 has-text-weight-normal">免费服务器 路由端口映射</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Tool/">Tool</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/06/03/Tool/heroku/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.4/image/tool/heroku.jpeg" alt="免费服务器 Heroku">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-03T09:39:30.356Z">2020-06-03</time></div>
+                    <a href="/2020/06/03/Tool/heroku/" class="title has-link-black-ter is-size-6 has-text-weight-normal">免费服务器 Heroku</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Tool/">Tool</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GearHost/">
+                        <span class="tag">GearHost</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Heroku/">
+                        <span class="tag">Heroku</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Promise/">
+                        <span class="tag">Promise</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/QRCode/">
+                        <span class="tag">QRCode</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Tips/">
+                        <span class="tag">Tips</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/VPN-L2TP/">
+                        <span class="tag">VPN L2TP</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/baidu/">
+                        <span class="tag">baidu</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E8%B7%AF%E7%94%B1%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84/">
+                        <span class="tag">路由端口映射</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                    
+                    <img src="/images/logo.png" alt="Promise 简单实现" height="28">
+                    
+                </a>
+                <p class="is-size-7">
+                    &copy; 2020 lightzhu&nbsp;
+                    Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                    <br>
+                    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                </p>
+            </div>
+            <div class="level-end">
+                
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                    
+                    <p class="control">
+                        <a class="button is-white is-large" target="_blank"
+                            rel="noopener" title="Creative Commons"
+                            href="https://creativecommons.org/">
+                            
+                            <i class="fab fa-creative-commons"></i>
+                            
+                        </a>
+                    </p>
+                    
+                    <p class="control">
+                        <a class="button is-white is-large" target="_blank"
+                            rel="noopener" title="Attribution 4.0 International"
+                            href="https://creativecommons.org/licenses/by/4.0/">
+                            
+                            <i class="fab fa-creative-commons-by"></i>
+                            
+                        </a>
+                    </p>
+                    
+                    <p class="control">
+                        <a class="button is-white is-large" target="_blank"
+                            rel="noopener" title="Download on GitHub"
+                            href="https://github.com/ppoffice/hexo-theme-icarus">
+                            
+                            <i class="fab fa-github"></i>
+                            
+                        </a>
+                    </p>
+                    
+                </div>
+                
+                <div>
+                    
+                    <!-- <span id="busuanzi_container_site_uv">
+                                        共<span id="busuanzi_value_site_uv">0</span>个访客
+                                    </span> -->
+                    <span id="busuanzi_container_site_pv">
+                        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                    </span>
+                    <span class="post-meta-divider">|</span>
+                    <span id="busuanzi_container_site_uv" style='display:none'>
+                        您是第<span id="busuanzi_value_site_uv"></span>访客
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var now = new Date();
+        function createtime() {
+            var grt = new Date("03/28/2020 12:00:00");
+            now.setTime(now.getTime() + 250);
+            days = (now - grt) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+            hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+            if (String(hnum).length == 1) { hnum = "0" + hnum; } minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+            mnum = Math.floor(minutes); if (String(mnum).length == 1) { mnum = "0" + mnum; }
+            seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+            snum = Math.round(seconds); if (String(snum).length == 1) { snum = "0" + snum; }
+            document.getElementById("timeDate").innerHTML = "本站已安全运行 " + dnum + " 天 ";
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 ";
+        }
+        setInterval("createtime()", 60000);
+        createtime();
+    </script>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+<script src="/js/click.js"></script>
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://www.2048888.xyz',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

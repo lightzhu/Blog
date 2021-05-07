@@ -1,0 +1,35 @@
+{
+  "name": "my-blog",
+  "version": "1.0.0",
+  "description": "blog md",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test",
+    "start": "npm run docs:dev",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lightzhu/Blog.git"
+  },
+  "keywords": [
+    "blog",
+    "vue",
+    "vuepress"
+  ],
+  "author": "lightzhu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lightzhu/Blog/issues"
+  },
+  "homepage": "https://github.com/lightzhu/Blog#readme",
+  "dependencies": {
+    "vuepress": "^1.8.2",
+    "vuepress-theme-reco": "^1.6.6"
+  },
+  "devDependencies": {
+    "@vuepress/plugin-pwa": "1.2.0",
+    "@vuepress/plugin-register-components": "1.2.0"
+  }
+}

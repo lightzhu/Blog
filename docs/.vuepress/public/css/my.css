@@ -1,0 +1,472 @@
+body{
+
+}
+.container{
+    max-width: 1200px!important;
+    overflow: hidden;
+    position: relative;
+}
+.header{
+
+}
+
+#nav-bar{
+    background-color: #2c3e50;
+    height: 70px;
+    width: 100%;
+    color: #f5f5f5;
+    margin-bottom: 0;
+}
+#nav-bar div .fl{
+    font-size: 16px;
+    font-weight: bold;
+    /*line-height: 70px;*/
+    color: #FFFFFF;
+}
+#nav-bar .nav-ul li{
+    float: left;
+    /*line-height: 70px;*/
+    width: 100px;
+    cursor: pointer;
+    text-align: center;
+}
+.nav-ul li:hover,.nav-ul li.active{
+    color: #E87E04;
+}
+.nav-more{
+    display: none;
+}
+#nav-bar .container{
+    line-height: 70px;
+}
+/*.section{*/
+    /*min-height: 700px;*/
+/*}*/
+#nav-bar .nav-ul.nav-xs-ul{
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    z-index: 2;
+    display: none;
+}
+#nav-bar .nav-ul.nav-xs-ul li{
+    width: 100%;
+    height: 3em;
+    color: #f5f5f5;;
+    background-color: #2c3e50;
+    line-height: 3em;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+
+}
+#nav-bar .nav-ul.nav-xs-ul li:hover,
+#nav-bar .nav-ul.nav-xs-ul li.active{
+    color: #E87E04;
+}
+#nav-bar .nav-ul.nav-xs-ul li:first-child{
+    border-top: 1px solid #555;
+}
+#toTop{
+    width: 45px;
+    height: 50px;
+    background-color: #5e5e5e;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    display: block;
+    opacity: 0.5;
+    border-radius: 5px;
+    position: fixed;
+    right: 40px;
+    bottom: 80px;
+    z-index: 100;
+}
+#toTop:hover{
+    opacity: 1;
+}
+#section1.section{
+    padding: 20vh 0 28vh;
+    text-align: center;
+    letter-spacing: 2px;
+    -webkit-transition: all 300ms;
+    transition: all 300ms;
+    background: rgba(256,256,256,0.4);
+}
+#section1 h1{
+    text-indent: -1000px;
+
+}
+#section1 h3{
+    font-size: 30px;
+    color: #000;
+    margin-top: 40px;
+}
+.section h2{
+    letter-spacing: 3px;
+    font-size: 50px;
+    color: #2c3e50;
+}
+
+/*.fade, .fades{*/
+    /*transform: translate(2em);*/
+    /*-webkit-transform: translateY(2em);*/
+    /*opacity: 1;*/
+/*}*/
+
+#section1 .bgimg{
+    z-index: -1;
+    background: url(../image/bg1.jpg) no-repeat center ;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#section1 .slInfo a{
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    border: 1px solid;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 30px 8px;
+}
+#section1 .slInfo a:hover, #section1 .slInfo a.active{
+    background: #2c3e50;
+    color: #fff;
+}
+
+
+/*第二部分*/
+#section2 h2{
+}
+#section2 .container img{
+    display: inline-block;
+    width: 200px;
+    height: 140px;
+    margin-top: 40px;
+}
+.section .tip{
+    display: block;
+    width: 80px;
+    height: 4px;
+    border-bottom: 4px solid #E87E04;
+    margin: 0 auto;
+}
+.myintro p{
+   max-width: 850px;
+    margin: 0 auto;
+    text-indent: 2em;
+    padding: 2em 0;
+    font-size: 16px;
+}
+.myintro p:nth-child(2){
+    padding: 0;
+
+}
+/*第三部分*/
+
+#section3 .container p{
+    text-align: center;
+}
+#section3 .container h4{
+    color: #E87E04;
+    margin: 2em 0;
+    font-size: 16px;
+}
+#section3 .container{
+    margin-top: 60px;
+}
+/*第四部分*/
+#section4 .container>p{
+margin: 10px 0 20px;
+font-size: 15px;
+}
+/*#section4 .container>div{*/
+/*padding: 10px;*/
+/*/!*width: 330px;*!/*/
+/*height: 220px;*/
+/*transition: all 0.3s linear;*/
+/*}*/
+#section4 .container>div .imgbox{
+width: 100%;
+height: 100%;
+display: inline-block;
+/*padding-bottom: 80%;*/
+overflow: hidden;
+text-align: center;
+}
+#section3 .container .qiang,
+#section4 .container .qiang{
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+}
+#section4 .container>div{
+    padding: 10px;
+    transition: all 0.3s linear;
+}
+#section4 .container>div:hover{
+    transition: all 0.3s linear;
+    padding: 0;
+}
+#section4 .container > div:hover .imgbox img{
+    -webkit-filter: brightness(0.3);
+    filter: brightness(0.3);
+}
+#section4 .container>div .imgbox img{
+    width: 100%;
+    transition: all 300ms ease;
+}
+#section4 .container>div:hover .mypro{
+    display: block;
+    padding: 0 2em;
+    /*background-color: #3c3c3c;*/
+}
+
+#section4 .container>div .mypro{
+    position: absolute;
+    width: 100%;
+    bottom: 10%;
+    left: 0;
+    color: #FFFFFF;
+    display: none;
+}
+#section4 .container>div .mypro>img{
+    width: 25px;
+    height: 25px;
+}
+/*第五部分*/
+.wrap{
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+}
+.circle-wrap{
+    width: 140px;
+    height: 140px;
+    border-radius: 70px;
+    border: 10px solid #dddddd;
+    position: absolute;
+}
+.circle-wrap .left-clip,
+.circle-wrap .right-clip{
+    width: 140px;
+    height: 140px;
+    border-radius: 70px;
+    left: -10px;
+    top: -10px;
+    border: 10px solid #2c3e50;
+    position: absolute;
+}
+.circle-wrap .left-clip {
+    clip:rect(0 70px 140px 0);
+    transition : transform ease;
+}
+.circle-wrap .right-clip {
+    clip: rect(0,140px,140px,70px);
+}
+.circle-num{
+    line-height: 120px;
+    text-align: center;
+}
+.circle-num span{
+    color: #2c3e50;
+    font-size: 30px;
+}
+#section5 .jineng{
+    text-align: center;
+    color: #e69425;
+    margin-top: 25px;
+}
+#section5 .tip{
+    margin-bottom: 100px;
+}
+#section5 .wrap .left-clip{
+    transform: rotate(180deg);
+}
+#section5 .fades>div:nth-child(1) .left-clip{
+    transform: rotate(324deg);
+    transition: 3s;
+}
+#section5 .fades>div:nth-child(2) .left-clip{
+    transform: rotate(324deg);
+    transition: 3s;
+}
+#section5 .fades>div:nth-child(3) .left-clip{
+    transform: rotate(306deg);
+    transition: 3s;
+}
+#section5 .fades>div:nth-child(4) .left-clip{
+    transform: rotate(324deg);
+    transition: 3s;
+}
+
+/*第六部分*/
+#section6 .my-exp li{
+    position: relative;
+    height: 160px;
+}
+#section6 .my-exp:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 20px;
+    left: 50%;
+    width: 5px;
+    margin-left: -2px;
+    background-color: #1d28ff;
+}
+#section6 .date-line{
+    width: 120px;
+    height: 120px;
+    border: 1px solid #eee;
+    background: #4dff56;
+    border-radius: 50%;
+    padding-top: 20px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -60px;
+}
+#section6 .date-line p{
+    text-align: center;
+    font: bold 16px/20px "宋体";
+}
+#section6 .my-work,
+#section6 .my-college{
+    width: 40%;
+    text-align: center;
+    
+}
+#section6 .my-work strong,
+#section6 .my-college strong{
+    color: #626e7c;
+    font-size: 16px;
+    text-align: right;
+    display: block;
+}
+#section6 .my-work p,
+#section6 .my-college p{
+    text-align: right;
+}
+#section6 .ptitle{
+    margin: 0.5em 0;
+    color: #cbcb6a;
+}
+#section6 .my-uni{
+    width: 40%;
+}
+#section6 .my-uni p,
+#section6 .my-uni strong{
+   text-align: left;
+    display: block;
+}
+#section6 .tip,
+#section7 .tip{
+    margin-bottom: 60px;
+}
+#section7.section{
+    min-height: 388px;
+}
+#section7 li,
+#section7 a{
+    font-size: 16px;
+}
+#section7 a:hover{
+    color: #5fff1b;
+}
+#section7 h5{
+    font-size: 20px;
+}
+
+/*动画效果*/
+.fades, .fade{
+    transform: translateY(2em);
+    -webkit-transform: translateY(2em);
+    opacity:0;
+}
+
+.section.active .fadesin{
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+    opacity: 1;
+    transition: all 1s 0.2s;
+}
+
+
+/*媒体查询&自适应*/
+@media screen and (max-width:1244px){
+    #section6 .fades{
+        width: 50%;
+        margin: 0 auto;
+    }
+    #section6 .date-line{
+        left: 0;
+        margin-left: 0;
+    }
+    #section6 .my-exp:before{
+        left: 72px;
+        margin-left: 0;
+    }
+    #section6 .my-exp .my-work,
+    #section6 .my-exp .my-uni,
+    #section6 .my-exp .my-college{
+        float: left;
+        width: 60%;
+        margin-left: 160px;
+    }
+    #section6 .my-xp p,
+    #section6 .my-xp strong{
+        text-align: left;
+    }
+}
+
+@media screen and (max-width: 992px){
+    #section4 .container>div:hover{
+        transition: all 0.3s linear;
+        padding: 10px;
+    }
+}
+@media only screen and (max-width:788px){
+    /*导航条变化*/
+    .nav-ul{
+        display: none;
+    }
+    .nav-more{
+        display: block;
+        cursor: pointer;
+    }
+    /*我的作品hover改变*/
+    #section4 .container > div .mypro{
+        display: block;
+    }
+    #section4 .container>div .imgbox img{
+        -webkit-filter: brightness(0.3);
+        filter: brightness(0.3);
+    }
+    #section3,#section2,#section4,#section6,#section5{
+        height: auto;
+        min-height: 100vh;
+    }
+    #section6 .fades{
+        width: 80%;
+        margin: 0 auto;
+    }
+    #section3 .container .qiang{
+        clear: both;
+    }
+}
+
+@media only screen and (min-width:768px){
+    .container {
+        width: 100%;
+    }
+
+}
