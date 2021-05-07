@@ -1,12 +1,3 @@
----
-home: true
-heroImage: /icon_vuepress_reco.png
-heroImageStyle: { maxWidth: '200px', width: '100%', display: block, margin: '0 auto 2rem', borderRadius: '1rem' }
-isShowTitleInHome: true
-# actionText: About
-# actionLink: /views/other/about
----
-
 ## vuepress 项目
 
 ```

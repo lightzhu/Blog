@@ -33,15 +33,14 @@ module.exports = {
     nav: [
       { text: 'Home', icon: 'reco-home', link: '/' },
       { text: '工具', icon: 'reco-api', link: '/tool/' },
-      { text: 'Node', icon: 'reco-npm', link: '/node/' },
       { text: 'External', link: 'https://github.com/lightzhu' }
     ],
     // 博客配置
     blogConfig: {
-      // category: {
-      //   location: 4, // 在导航栏菜单中所占的位置，默认2
-      //   text: 'Category' // 默认文案 “分类”
-      // },
+      category: {
+        location: 3, // 在导航栏菜单中所占的位置，默认2
+        text: 'Category' // 默认文案 “分类”
+      },
       tag: {
         location: 4, // 在导航栏菜单中所占的位置，默认3
         text: '标签' // 默认文案 “标签”
