@@ -5,7 +5,7 @@ keywords: Linux
 tags:
   - Linux
 categories:
-  - 服务器
+  - Server
 comments: true
 # sidebar: 'auto'
 # publish: false

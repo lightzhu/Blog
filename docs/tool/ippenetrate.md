@@ -5,7 +5,7 @@ date: '2020-03-05 18:00:00'
 keywords: 路由端口映射 免费服务器
 thumbnail: 'https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.4/image/tool/iptans.jpg'
 categories: Tool
-tags: 路由端口映射
+tags: ip-port
 abbrlink: '7e709354'
 comments: true
 ---

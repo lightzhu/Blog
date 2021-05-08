@@ -5,9 +5,9 @@ keywords:
   - 部署
   - 阿里云
 tags:
-  - 阿里云
+  - Aliyun
 categories:
-  - 服务器
+  - Server
 comments: true
 # sidebar: 'auto'
 # publish: false

@@ -1,7 +1,8 @@
 ---
 title: 免费VPN  L2TP方式,window和android 配置方式
 date: '2019-08-08 08:00:00'
-keywords: -VPN
+keywords:
+  - VPN
   - android window
   - 科学上网
 thumbnail: 'https://i.loli.net/2020/07/24/Scq1k7hbzwUTQo2.png'
