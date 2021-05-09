@@ -48,6 +48,13 @@ module.exports = {
     }
   },
   configureWebpack: {
+    devServer: {
+      port: 3100,
+      hot: true,
+      open: true,
+      hotOnly: true
+      // inline: true,
+    },
     resolve: {
       alias: {
         '@': '.vuepress'

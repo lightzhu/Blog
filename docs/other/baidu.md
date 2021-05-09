@@ -18,13 +18,13 @@ comments: true
   <meta name="robots" content="all" />
   <meta name="robots" content="index,follow" />
   <title>百度语音合成</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/picnic.min.css">
   <style>
     .container{
       width:100%;
     }
-    .btn-primary {
-      margin: 20px;
+    .button {
+      margin: 20px 0;
       width: 100px;
       float: right;
     }
@@ -36,10 +36,10 @@ comments: true
     <h1 class="text-center">百度语音合成演示</h1>
     <div>
       <textarea id="text" class="form-control" rows="5" placeholder="输入要合成的文本"></textarea>
-      <a download="audio.mp3" id="btn" type="audio/mp3" class="btn btn-primary">合成</a>
+      <div><a class="button" download="audio.mp3" id="btn" type="audio/mp3" >合成</a> </div>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.2/js/jquery-1.11.1.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.8.0/jquery-1.8.0.min.js"></script>
   <script>
     $("#btn").click(function () {
       // console.log($('#text').val())

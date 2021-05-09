@@ -18,13 +18,15 @@ comments: true
   <meta name="robots" content="all" />
   <meta name="robots" content="index,follow" />
   <title>网址二维码生成器</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/picnic.min.css">
   <style>
     .container{
       width:100%;
     }
     .form-group {
       display:flex;
+      justify-content: center;
+      align-items: center;
     }
     .form-group label{
       line-height:34px;
@@ -57,7 +59,7 @@ comments: true
       <div class="form-group">
         <label for="website">网 址：</label>
         <input type="text" class="form-control" id="website" placeholder="输入网址">
-        <button id="creatCode" class="btn btn-primary">确认</button> 
+        <button id="creatCode">确认</button>
       </div>
       <div class="image-box">
         <img src="" class="img" alt="生成的二维码">
@@ -65,16 +67,16 @@ comments: true
     </div>
     <div class="file-box">
       <div class="form-group">
-        <label for="website">网 址：</label>
-        <input type="file" id="file" accept="image/*" placeholder="上传图片">
-        <button id="creatFileCode" class="btn btn-primary">确认</button> 
+        <label for="file">图片：</label>
+        <input type="file" id="file" class="form-control" accept="image/*" placeholder="上传图片">
+        <button id="creatFileCode" >确认</button>
       </div>
       <div class="image-box">
         <img src="" class="img" alt="生成的二维码">
       </div> 
     </div> 
   </div>
-  <script src="https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.2/js/jquery-1.11.1.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.8.0/jquery-1.8.0.min.js"></script>
   <script>
     $("#creatCode").click(function(){
       if($('#website').val().length){

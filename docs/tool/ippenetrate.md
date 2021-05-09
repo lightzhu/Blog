@@ -14,6 +14,11 @@ comments: true
 
 分享一个路由端口映射，搭建永久个人免费服务器使用教程，满足展示、测试、展示等需求。
 
+<div>
+<img style="height: 200px" src="/image/tool/webip02.png" />
+</div>
+<!-- more -->
+
 ### 什么是端口映射
 
 端口映射又称端口转发、NAT、虚拟服务器。就是外网访问内网通过端口映射的方式。
