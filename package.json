@@ -7,7 +7,8 @@
     "test": "npm run test",
     "start": "npm run docs:dev",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "deploy": "bash deploy.sh"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/lightzhu/Blog/issues"
   },
-  "homepage": "https://github.com/lightzhu/Blog#readme",
+  "homepage": "./",
   "dependencies": {
     "vuepress": "^1.8.2",
     "vuepress-theme-reco": "^1.6.6"

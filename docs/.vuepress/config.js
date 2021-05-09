@@ -6,7 +6,7 @@ module.exports = {
   smoothScroll: true,
   // dest: 'public',
   head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['link', { rel: 'shortcut icon', href: '/favicon.svg' }],
     ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }],
     ['meta', { name: 'author', content: 'ligtzhu' }],
     ['meta', { name: 'keywords', content: 'vuepress,前端,Node、H5、css、blog' }],
@@ -39,7 +39,7 @@ module.exports = {
     blogConfig: {
       category: {
         location: 3, // 在导航栏菜单中所占的位置，默认2
-        text: 'Category' // 默认文案 “分类”
+        text: '分类' // 默认文案 “分类”
       },
       tag: {
         location: 4, // 在导航栏菜单中所占的位置，默认3
