@@ -1,7 +1,7 @@
 module.exports = {
   title: '朝花夕拾',
   subtitle: '朱国亮的个人博客',
-  description: '一个菜鸟前端日常的blog',
+  description: '一个菜鸟的日常记录',
   base: '/',
   smoothScroll: true,
   // dest: 'public',
