@@ -18,3 +18,10 @@ npm install -D vuepress
 - docs/.vuepress/templates/ssr.html: 构建时基于 Vue SSR 的 HTML 模板文件。
 - docs/.vuepress/config.js: 配置文件的入口文件，也可以是 YML 或 toml。
 - docs/.vuepress/enhanceApp.js: 客户端应用的增强。
+
+## 部署
+
+- 'bash' 不是内部或外部命令，也不是可运行的程序或批处理文件。解决：打开到文件夹，右键 git bash here
+- 在 docs/.vuepress/config.js 中设置正确的 base。
+- 如果你打算发布到 https://<USERNAME>.github.io/，则可以省略这一步，因为 base 默认即是 "/"。
+- 如果你打算发布到 https://<USERNAME>.github.io/<REPO>/（也就是说你的仓库在 https://github.com/<USERNAME>/<REPO>），则将 base 设置为 "/<REPO>/"。
