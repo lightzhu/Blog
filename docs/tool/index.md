@@ -1,16 +1,41 @@
 ---
-title: 测试
+title: Html 123
 # toc: true
-keywords:
+keywords: hao123
 thumbnail:
-categories:
+categories: html
 tags:
 comments: true
 ---
 
-## 原生标签测试
-
-<p class="demo" :class="$style.example"></p>
+<style>
+  .main{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .item{
+    width:22%;
+    text-align:center;
+    margin-top:15px;
+  }
+</style>
+<h2>网址导航</h2>
+<div class="main custom">
+<p class="item" :class="[$style.example]">
+  <a href="https://lightzhu.github.io/dev/ariang">AriaNg</a> 
+</p>
+<p class="item" :class="$style.example">
+<a href="http://91.134.238.131:1180/docs/vue/introduce-cn/">Ant Design Vue</a> 
+</p>
+<p class="item" :class="$style.example">
+<a href="http://p3terx.gitee.io/ariang">Ariang gitee</a> 
+</p>
+<p class="item" :class="$style.example">
+<a href="https://web.2048888.xyz/">电影</a> 
+</p>
+</div>
 
 <style module>
 .example {
@@ -22,8 +47,8 @@ comments: true
 export default {
   props: ['slot-key'],
   mounted () {
-    document.querySelector(`.${this.$style.example}`)
-      .textContent = '这个块是被内联的脚本渲染的，样式也采用了内联样式。'
+    // document.querySelector(`.${this.$style.example}`)
+    //   .textContent = '这个块是被内联的脚本渲染的，样式也采用了内联样式。'
   }
 }
 </script>

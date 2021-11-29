@@ -1,8 +1,9 @@
 ---
 title: oracle arm服务器安装java环境
 date: '2021-10-26 22:00:00'
+keywords: oracle arm tomcat9 java1.8
 categories: Tool
-tags: oracle arm tomcat9 java1.8
+tags: oracle
 comments: true
 ---
 
