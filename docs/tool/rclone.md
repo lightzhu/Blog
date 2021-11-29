@@ -66,7 +66,7 @@ WantedBy=multi-user.target
   `
 
 - 常用的 rclone 命令有：
-  ` rclone config - 以控制会话的形式添加rclone的配置，配置保存在.rclone.conf文件中。 rclone copy - 将文件从源复制到目的地址，跳过已复制完成的。 rclone sync - 将源数据同步到目的地址，只更新目的地址的数据。 rclone move - 将源数据移动到目的地址。 rclone delete - 删除指定路径下的文件内容。 rclone purge - 清空指定路径下所有文件数据。 rclone mkdir - 创建一个新目录。 rclone rmdir - 删除空目录。 rclone check - 检查源和目的地址数据是否匹配。 rclone ls - 列出指定路径下所有的文件以及文件大小和路径。 rclone lsd - 列出指定路径下所有的目录/容器/桶。 rclone lsl - 列出指定路径下所有文件以及修改时间、文件大小和路径。 rclone md5sum - 为指定路径下的所有文件产生一个md5sum文件。 rclone sha1sum - 为指定路径下的所有文件产生一个sha1sum文件。 rclone size - 获取指定路径下，文件内容的总大小。. rclone version - 查看当前版本。 rclone cleanup - 清空remote。 rclone dedupe - 交互式查找重复文件，进行删除/重命名操作。`
+  `rclone config - 以控制会话的形式添加rclone的配置，配置保存在.rclone.conf文件中。 rclone copy - 将文件从源复制到目的地址，跳过已复制完成的。 rclone sync - 将源数据同步到目的地址，只更新目的地址的数据。 rclone move - 将源数据移动到目的地址。 rclone delete - 删除指定路径下的文件内容。 rclone purge - 清空指定路径下所有文件数据。 rclone mkdir - 创建一个新目录。 rclone rmdir - 删除空目录。 rclone check - 检查源和目的地址数据是否匹配。 rclone ls - 列出指定路径下所有的文件以及文件大小和路径。 rclone lsd - 列出指定路径下所有的目录/容器/桶。 rclone lsl - 列出指定路径下所有文件以及修改时间、文件大小和路径。 rclone md5sum - 为指定路径下的所有文件产生一个md5sum文件。 rclone sha1sum - 为指定路径下的所有文件产生一个sha1sum文件。 rclone size - 获取指定路径下，文件内容的总大小。. rclone version - 查看当前版本。 rclone cleanup - 清空remote。 rclone dedupe - 交互式查找重复文件，进行删除/重命名操作。`
 
 ## Mac 系统安装 rclone,生成配置文件
 
