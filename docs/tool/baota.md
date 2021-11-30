@@ -3,7 +3,7 @@ title: 宝塔面板
 date: '2021-11-29 18:00:00'
 # toc: true
 keywords: 宝塔面板 docker java
-thumbnail: 'https://lightzhu.github.io/image/oracle/baotahome.jpg'
+thumbnail: 'https://raw.githubusercontent.com/lightzhu/picgo/main/bt-bg.png'
 categories: Tool
 tags: BT
 comments: true
