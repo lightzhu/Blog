@@ -37,6 +37,15 @@ comments: true
     .form-group .btn{
       margin:0px;
     }
+    .file-box{
+      margin-top:20px;
+    }
+    .down{
+      margin-top:20px;
+    }
+    .down p{
+      display:inline-block;
+    }
     .image-box{
       min-height:350px;
       text-align:center;
@@ -46,6 +55,9 @@ comments: true
       min-height:300px;
       height:auto;
       border:1px solid #ccc;
+    }
+    .down{
+      display:none;
     }
   </style>
 </head>
@@ -71,14 +83,10 @@ comments: true
       </label>
       <label>
         <input type='radio' name="radiotype" value="4">
-        <span class="checkable">.glb向量化压缩</span>
-      </label>
-        <label>
-        <input type='radio' name="radiotype" value="5">
-        <span class="checkable">.glb KHR_draco_mesh_compression 网格压缩</span>
+        <span class="checkable">KHR_draco_mesh_compression 网格压缩</span>
       </label>
       <label>
-        <input type='radio' name="radiotype" value="6">
+        <input type='radio' name="radiotype" value="5">
         <span class="checkable">.glb EXT_meshopt_compression</span>
       </label>
     </div> 
@@ -88,8 +96,10 @@ comments: true
         <input type="file" id="file" class="form-control" accept=".gltf,.glb" placeholder="上传">
         <button id="creatFile">确认</button>
       </div>
-      <div class="image-box">
-        <p>下载地址</p>
+      <div class="down">
+        <p id="dist">下载地址</p>
+        <span class="size"></span>
+        <a href="/" target="_blank">点击下载</a>
       </div> 
     </div> 
   </div>
@@ -104,7 +114,7 @@ comments: true
         var data = new FormData();
         data.append('file', files[0]);
         data.append('type', type);
-        console.log(data);
+        $('.down').hide();
         uploadFileAndconvert(data);
       })
       function uploadFileAndconvert(params){
@@ -116,9 +126,14 @@ comments: true
           cache: false, 
           processData: false, 
           contentType: false, 
-          success: function (data) {
-            console.log(data)
-            // $('.file-box .img').eq(0).attr('src',data.url)
+          success: function (res) {
+            console.log(res)
+            if(res.code!==200){
+              return window.alert(res.msg)
+            }
+            $('.down').show().find('#dist').text(res.data.path)
+            $('.down .size').eq(0).text(res.data.size)
+            $('.down a').eq(0).attr('href',res.data.path)
           },
           error: function (err) {
             console.log(err)
