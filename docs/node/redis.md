@@ -1,3 +1,15 @@
+---
+title: Redis
+date: '2021-05-07 19:00:00'
+keywords: Redis
+tags:
+  - redis
+categories: Other
+comments: true
+# sidebar: 'auto'
+# publish: false
+---
+
 ## Redis 清空所有数据步骤总结
 
 ## 切换至 Redis 安装目录,在 cmd 命令窗口，输入连接 Redis 指令：redis-cli.exe -h 127.0.0.1 -p 6389

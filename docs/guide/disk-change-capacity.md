@@ -2,7 +2,9 @@
 title: Ubuntu服务器磁盘扩容
 date: '2021-11-18 18:00:00'
 categories: Ubuntu
-tags: parted Ubuntu disk
+tags:
+  - Ubuntu
+  - disk
 comments: true
 ---
 

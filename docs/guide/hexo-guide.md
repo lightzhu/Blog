@@ -1,11 +1,16 @@
 ---
 title: Hexo Blog 系统指引
 date: '2019-05-04 17:00'
-thumbnail: 'https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.2/image/js.png'
+thumbnail: ''
+keywords: Hexo Blog 个人博客
+tags: Hexo
+categories: Other
+comments: true
 ---
 
 使用[Hexo](https://hexo.io/)和 githubpages 搭建个人博客!
 
+<img style="height: 200px" src="https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.2/image/js.png" />
 <!-- more -->
 
 ## 快速开始
