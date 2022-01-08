@@ -21,20 +21,22 @@ comments: true
     margin-top:15px;
   }
 </style>
+
 <h2>网址导航</h2>
 <div class="main custom">
-<p class="item" :class="[$style.example]">
-  <a href="https://lightzhu.github.io/dev/ariang">AriaNg</a> 
-</p>
-<p class="item" :class="$style.example">
-<a href="http://91.134.238.131:1180/docs/vue/introduce-cn/">Ant Design Vue</a> 
-</p>
-<p class="item" :class="$style.example">
-<a href="http://p3terx.gitee.io/ariang">Ariang gitee</a> 
-</p>
-<p class="item" :class="$style.example">
-<a href="https://web.2048888.xyz/">电影</a> 
-</p>
+  <p class="item" :class="[$style.example]">
+    <a href="https://lightzhu.github.io/dev/ariang">AriaNg</a>
+  </p>
+  <p class="item" :class="$style.example">
+    <a href="http://91.134.238.131:1180/docs/vue/introduce-cn/">Ant Design Vue</a>
+  </p>
+  <p class="item" :class="$style.example">
+    <a href="http://p3terx.gitee.io/ariang">Ariang gitee</a>
+  </p>
+  <p class="item" :class="$style.example">
+    <a href="https://web.2048888.xyz/">电影</a>
+  </p>
+  <!-- <p @click="hand">ssss</p> -->
 </div>
 
 <style module>
@@ -47,8 +49,12 @@ comments: true
 export default {
   props: ['slot-key'],
   mounted () {
-    // document.querySelector(`.${this.$style.example}`)
-    //   .textContent = '这个块是被内联的脚本渲染的，样式也采用了内联样式。'
+
+  },
+  methods:{
+    hand(){
+      console.log(0)
+    }
   }
 }
 </script>

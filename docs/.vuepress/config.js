@@ -1,7 +1,7 @@
 module.exports = {
   title: '朝花夕拾',
   subtitle: '朱国亮的个人博客',
-  description: '让你软弱的正是你自己的懒惰！',
+  description: '让你软弱的正是自己的懒惰！',
   base: '/',
   smoothScroll: true,
   // dest: 'public',
@@ -11,20 +11,8 @@ module.exports = {
     ['meta', { name: 'author', content: 'ligtzhu' }],
     ['meta', { name: 'keywords', content: 'vuepress,前端,Node、H5、css、blog' }],
     ['meta', { name: 'theme-color', content: '#42b983' }],
-    ['script', { src: 'https://cdn.bootcdn.net/ajax/libs/jquery/1.8.0/jquery-1.8.0.min.js' }],
-    [
-      ('script',
-      {},
-      `
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?50879d2668c8f4bf9b35b92431627be9";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
-        })();
-        `)
-    ]
+    ['script', { src: 'https://hm.baidu.com/hm.js?50879d2668c8f4bf9b35b92431627be9' }],
+    ['script', { src: 'https://cdn.bootcdn.net/ajax/libs/jquery/1.8.0/jquery-1.8.0.min.js' }]
   ],
   theme: 'reco',
   themeConfig: {

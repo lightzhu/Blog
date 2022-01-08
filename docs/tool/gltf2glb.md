@@ -10,9 +10,9 @@ comments: true
 <div class="center">
 <img class="mcenter" style="height: 200px" src="https://gitee.com/lightzhu/picgo/raw/master/blog-thumbnail.png" />
 </div>
+
 <!-- more -->
 
-<!DOCTYPE HTML>
 <html>
 
 <head>
@@ -74,7 +74,7 @@ comments: true
   <div class="container">
     <div>
        <label>
-        <input type='radio' name="radiotype" value="0">
+        <input type='radio' name="radiotype" checked value="0">
         <span class="checkable">.gltf 转 .glb</span>
       </label>
        <label>
@@ -86,19 +86,20 @@ comments: true
         <span class="checkable">材质拆分</span>
       </label>
       <label>
-        <input type='radio' name="radiotype" value="5">
+        <input type='radio' name="radiotype" value="3">
         <span class="checkable">EXT_meshopt_compression 压缩</span>
       </label>
     </div>
     <div>
       <label>
-        <input type='radio' name="radiotype" value="3">
+        <input type='radio' name="radiotype" value="4">
         <span class="checkable">KHR_mesh_quantization 向量化压缩</span>
       </label>
       <label>
-        <input type='radio' name="radiotype" value="4">
+        <input type='radio' name="radiotype" value="5">
         <span class="checkable">KHR_draco_mesh_compression 网格压缩</span>
       </label>
+    </div>
     </div> 
     <div class="file-box">
       <div class="form-group">
@@ -144,9 +145,10 @@ comments: true
         $.ajax({
           type: "post",
           url: "http://127.0.0.1:7001/3dmodel/convert",
-          // url:"https://api.2048888.xyz/qrcode",
+          // url:"http://xapi.2048888.xyz/3dmodel/convert",
           data:params,
-          cache: false, 
+          cache: false,
+          timeout : 50000,
           processData: false, 
           contentType: false, 
           success: function (res) {
