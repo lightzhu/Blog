@@ -144,8 +144,8 @@ comments: true
       function uploadFileAndconvert(params){
         $.ajax({
           type: "post",
-          url: "http://127.0.0.1:7001/3dmodel/convert",
-          // url:"http://xapi.2048888.xyz/3dmodel/convert",
+          // url: "http://127.0.0.1:7001/3dmodel/convert",
+          url:"http://xapi.2048888.xyz/3dmodel/convert",
           data:params,
           cache: false,
           timeout : 50000,
