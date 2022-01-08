@@ -3,8 +3,7 @@ title: 宝塔面板
 date: '2021-11-29 18:00:00'
 # toc: true
 keywords: 宝塔面板 docker java
-thumbnail: 'https://raw.githubusercontent.com/lightzhu/picgo/main/bt-bg.png'
-categories: Tool
+categories: Ubuntu
 tags: BT
 comments: true
 ---
@@ -13,7 +12,22 @@ comments: true
 
 宝塔 Linux 面板是提升运维效率的服务器管理软件,此日志记录折腾宝塔的一些简单记录。
 
+<div class="center">
+<img class="mcenter" style="height: 200px" src="https://raw.githubusercontent.com/lightzhu/picgo/main/bt-bg.png" />
+</div>
 <!-- more -->
+
+## ubuntu20 进不去宝塔面板问题
+
+- 防火墙也放行了，安全组已经开放端口
+- apt-get purge iptables 不使用 iptables
+- reboot
+
+### 或者原理一样
+
+- rm -f /etc/iptables/rules.v4
+- rm -f /etc/iptables/rules.v6
+- reboot
 
 ## 首先，ssh 连接服务器，安装脚本参考官网。
 
@@ -43,7 +57,8 @@ Tomcat 自带 java8，如果遇到特殊问题，可参考[服务器安装 java 
 
 ```
 docker run -d --name=webdav-aliyundriver
---restart=always -p 8080:8080
+--restart=always
+-p 8080:8080
 -v /etc/localtime:/etc/localtime
 -v /yourpath/aliyun-driver/:/etc/aliyun-driver/
 -e TZ="Asia/Shanghai"
@@ -51,6 +66,7 @@ docker run -d --name=webdav-aliyundriver
 -e ALIYUNDRIVE_AUTH_PASSWORD="admin"
 -e JAVA_OPTS="-Xmx1024m"
 zx5253/webdav-aliyundriver
+
 ```
 
 - rclone config 新建配置文件，挂载 webdev 阿里云盘到服务器
@@ -69,19 +85,19 @@ Aria2 是目前最强大的全能型下载工具，它支持 BT、磁力、HTTP�
 docker 部署:
 
 ```
-docker run -d \
-  --name aria2-pro \
-  --restart unless-stopped \
-  --log-opt max-size=1m \
-  --network host \
-  -e PUID=$UID \
-  -e PGID=$GID \
-  -e RPC_SECRET=<TOKEN> \
-  -e RPC_PORT=6800 \
-  -e LISTEN_PORT=6888 \
-  -v /yourpath/aria2-config:/config \
-  -v /youpath/downloads:/downloads \
-  -e SPECIAL_MODE=rclone \
+docker run -d
+  --name aria2-pro
+  --restart unless-stopped
+  --log-opt max-size=1m
+  --network host
+  -e PUID=$UID
+  -e PGID=$GID
+  -e RPC_SECRET=<TOKEN>
+  -e RPC_PORT=6800
+  -e LISTEN_PORT=6888
+  -v /yourpath/aria2-config:/config
+  -v /youpath/downloads:/downloads
+  -e SPECIAL_MODE=rclone
   p3terx/aria2-pro
 
 ```

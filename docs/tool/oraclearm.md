@@ -2,10 +2,15 @@
 title: oracle arm服务器安装java环境
 date: '2021-10-26 22:00:00'
 keywords: oracle arm tomcat9 java1.8
-categories: Tool
+categories: Ubuntu
 tags: oracle
 comments: true
 ---
+
+<div class="center">
+<img class="mcenter" style="height: 200px" src="https://gitee.com/lightzhu/picgo/raw/master/blog-thumbnail.png" />
+</div>
+<!-- more -->
 
 甲骨文云 arm 服务器安装 tomcat9 之后报错：
 `line 235: /www/server/tomcat/bin/jsvc: No such file or directory`

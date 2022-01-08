@@ -2,8 +2,7 @@
 title: Redis
 date: '2021-05-07 19:00:00'
 keywords: Redis
-tags:
-  - redis
+tags: redis
 categories: Other
 comments: true
 # sidebar: 'auto'

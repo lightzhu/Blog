@@ -2,11 +2,15 @@
 title: 3D 模型转换及压缩
 date: '2022-01-06 18:00:00'
 keywords: 3D three gltf glb KHR_draco_mesh_compression KHR_mesh_quantization
-thumbnail: 'https://gitee.com/lightzhu/picgo/raw/master/blog-thumbnail.png'
 tags: 3D
 categories: Tool
 comments: true
 ---
+
+<div class="center">
+<img class="mcenter" style="height: 200px" src="https://gitee.com/lightzhu/picgo/raw/master/blog-thumbnail.png" />
+</div>
+<!-- more -->
 
 <!DOCTYPE HTML>
 <html>
@@ -123,7 +127,6 @@ comments: true
       </div> 
     </div>
   </div>
-  <!-- <script src="/js/jquery-1.8.0.min.js"></script> -->
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.8.0/jquery-1.8.0.min.js"></script>
   <script>
     $(document).ready(function(){

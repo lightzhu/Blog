@@ -6,8 +6,7 @@ keywords:
   - 阿里云
 tags:
   - Aliyun
-categories:
-  - Server
+categories: Server
 comments: true
 # sidebar: 'auto'
 # publish: false

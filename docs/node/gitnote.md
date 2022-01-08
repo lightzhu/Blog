@@ -5,8 +5,6 @@ keywords: Git
 tags: Git
 categories: Tool
 comments: true
-# sidebar: 'auto'
-# publish: false
 ---
 
 #### 配置

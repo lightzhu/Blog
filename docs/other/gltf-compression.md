@@ -3,7 +3,7 @@ title: GLTF 3D模型压缩探索
 date: '2022-01-07 15:00:00'
 keywords: 3D three gltf glb KHR_draco_mesh_compression KHR_mesh_quantization
 tags: 3D
-categories: Other
+categories: Tool
 comments: true
 # sidebar: 'auto'
 # publish: false

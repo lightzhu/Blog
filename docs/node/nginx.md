@@ -7,8 +7,7 @@ keywords:
 tags:
   - nginx
   - Linux
-categories:
-  - Server
+categories: Server
 comments: true
 # sidebar: 'auto'
 # publish: false

@@ -4,8 +4,7 @@ date: '2021-05-07 21:00'
 keywords: Linux
 tags:
   - Linux
-categories:
-  - Server
+categories: Server
 comments: true
 # sidebar: 'auto'
 # publish: false

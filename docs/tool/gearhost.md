@@ -3,11 +3,17 @@ title: 免费服务器 GearHost
 date: '2019-09-28 18:00:00'
 # toc: true
 keywords: GearHost 免费服务器
-thumbnail: 'https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.4/image/tool/gearhost.png'
-categories: Tool
+categories: Server
 tags: GearHost
 comments: true
 ---
+
+现在已经关闭，无法免费使用。
+
+<div class="center">
+<img class="mcenter" style="height: 200px" src="https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.4/image/tool/gearhost.png" />
+</div>
+<!-- more -->
 
 ### 自己做了个小网站想发布到线上，但是没有服务器？
 

@@ -8,8 +8,7 @@ keywords:
 tags:
   - nginx
   - set-cookie
-categories:
-  - Server
+categories: Server
 comments: true
 ---
 

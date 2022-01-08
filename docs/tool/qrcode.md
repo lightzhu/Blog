@@ -3,11 +3,16 @@ title: 二维码生成器
 # toc: true
 keywords: 二维码生成器
 date: '2020-04-18 18:00:00'
-thumbnail: 'https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.6.6/image/wap.png'
 categories: Tool
 tags: QRCode
 comments: true
 ---
+
+<div class="center">
+<img class="mcenter" style="height: 200px" src="https://cdn.jsdelivr.net/gh/lightzhu/public_cdn@0.6.6/image/wap.png" />
+</div>
+
+<!-- more -->
 
 <!DOCTYPE HTML>
 <html>

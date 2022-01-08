@@ -11,8 +11,9 @@ module.exports = {
     ['meta', { name: 'author', content: 'ligtzhu' }],
     ['meta', { name: 'keywords', content: 'vuepress,前端,Node、H5、css、blog' }],
     ['meta', { name: 'theme-color', content: '#42b983' }],
+    ['script', { src: 'https://cdn.bootcdn.net/ajax/libs/jquery/1.8.0/jquery-1.8.0.min.js' }],
     [
-      'script',
+      ('script',
       {},
       `
         var _hmt = _hmt || [];
@@ -22,7 +23,7 @@ module.exports = {
           var s = document.getElementsByTagName("script")[0]; 
           s.parentNode.insertBefore(hm, s);
         })();
-        `
+        `)
     ]
   ],
   theme: 'reco',

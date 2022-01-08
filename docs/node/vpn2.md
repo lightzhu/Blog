@@ -9,8 +9,7 @@ thumbnail: 'https://i.loli.net/2020/07/24/Scq1k7hbzwUTQo2.png'
 tags:
   - VPN
   - L2TP
-categories:
-  - Node
+categories: Node
 comments: true
 # sidebar: 'auto'
 # publish: false
